@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나의 블로그</title>
+    <link rel="stylesheet" href="../css/work.css" />
+  </head>
+  <body>
+    <header>
+      <h1>나의 블로그</h1>
+    </header>
+    <main>
+      <section id="post-form">
+        <h2>글 작성하기</h2>
+        <input type="text" id="post-title" placeholder="제목을 입력하세요" />
+        <textarea id="post-content" placeholder="내용을 입력하세요"></textarea>
+        <button onclick="submitPost()">제출</button>
+      </section>
+      <section id="post-list">
+        <h2>글 목록</h2>
+        <ul id="list-container">
+          <!-- 여기에 제목들이 동적으로 추가될 예정 -->
+        </ul>
+      </section>
+    </main>
+    <script src="../js/work.js"></script>
+  </body>
+</html>
