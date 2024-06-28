@@ -58,6 +58,13 @@ main {
   padding: 0;
 }
 
+/* 기존 CSS 코드에서 추가된 부분 */
 #list-container li {
   margin-bottom: 10px;
+  cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
+  transition: background-color 0.3s ease; /* 배경색 변경 시 부드러운 전환 효과 */
+}
+
+#list-container li:hover {
+  background-color: #f0f0f0; /* 마우스를 올렸을 때 배경색이 연한 회색으로 변경 */
 }
