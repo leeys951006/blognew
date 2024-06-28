@@ -1,60 +1,31 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
-
-const hostname = '127.0.0.1';
+const app = express();
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-  if (req.method === 'GET' && req.url === '/') {
-    const filePath = path.join(__dirname, '/public/html/main.html');
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        console.error('Error reading main.html:', err);
-        res.statusCode = 500;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Internal Server Error');
-        return;
-      }
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/html');
-      res.end(data);
-    });
-  } else if (req.method === 'GET' && req.url === '/css/main.css') {
-    const filePath = path.join(__dirname, '/public/css/main.css');
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        console.error('Error reading styles.css:', err);
-        res.statusCode = 500;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Internal Server Error');
-        return;
-      }
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/css');
-      res.end(data);
-    });
-  } else if (req.method === 'GET' && req.url === '/js/main.js') {
-    const filePath = path.join(__dirname, '/public/js/main.js');
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        console.error('Error reading main.js:', err);
-        res.statusCode = 500;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Internal Server Error');
-        return;
-      }
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/javascript');
-      res.end(data);
-    });
-  } else {
-    res.statusCode = 404;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Not Found');
-  }
+// 정적 파일을 제공할 디렉토리를 설정합니다.
+app.use(express.static(path.join(__dirname, 'public')));
+
+// 루트 경로에 대한 GET 요청을 처리합니다.
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/html/main.html'));
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+// 특정 경로에 대한 GET 요청을 처리하여 CSS와 JS 파일을 제공합니다.
+app.get('/css/main.css', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/css/main.css'));
+});
+
+app.get('/js/main.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/js/main.js'));
+});
+
+// 모든 기타 요청에 대한 404 응답을 처리합니다.
+app.use((req, res) => {
+  res.status(404).send('Not Found');
+});
+
+// 서버를 시작하고 지정된 포트에서 요청을 듣습니다.
+app.listen(port, () => {
+  console.log(`Server running at http://127.0.0.1:${port}/`);
 });
