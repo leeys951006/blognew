@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나의 블로그</title>
+    <link rel="stylesheet" href="../css/Study.css" />
+    <script src="../js/Study.js"></script>
+  </head>
+  <body>
+    <a id="logo-link" href="main.html">
+      <div id="logo">
+        <img
+          src="https://st2.depositphotos.com/14460936/43756/v/450/depositphotos_437568958-stock-illustration-vector-businessman-trying-reduce-stress.jpg"
+          alt="stres사진"
+        />
+      </div>
+    </a>
+    <header>
+      <h1>Stress List</h1>
+    </header>
+    <main>
+      <section id="post-form">
+        <h2>글 작성하기</h2>
+        <input type="text" id="post-title" placeholder="제목을 입력하세요" />
+        <textarea id="post-content" placeholder="내용을 입력하세요"></textarea>
+        <button onclick="submitPost()">제출</button>
+      </section>
+      <section id="post-list">
+        <h2>글 목록</h2>
+        <ul id="list-container">
+          <!-- 여기에 제목들이 동적으로 추가될 예정 -->
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
