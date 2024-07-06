@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-  var savedPosts = JSON.parse(localStorage.getItem('savedPosts')) || [];
+  var Couplesave = JSON.parse(localStorage.getItem('Couplesave')) || [];
   var listContainer = document.getElementById('list-container');
 
   // 초기 목록 출력
-  savedPosts.forEach(function(post, index) {
+  Couplesave.forEach(function(post, index) {
     var listItem = createListItem(post, index);
     listContainer.appendChild(listItem);
   });
@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // 글 목록에 추가
-    savedPosts.push(post);
-    localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
+    Couplesave.push(post);
+    localStorage.setItem('Couplesave', JSON.stringify(Couplesave));
 
     // 목록에 새 글 추가
-    var listItem = createListItem(post, savedPosts.length - 1);
+    var listItem = createListItem(post, Couplesave.length - 1);
     listContainer.appendChild(listItem);
 
     // 입력 필드 초기화
@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 삭제 함수
   function deletePost(index) {
-    savedPosts.splice(index, 1);
-    localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
+    Couplesave.splice(index, 1);
+    localStorage.setItem('Couplesave', JSON.stringify(Couplesave));
   }
 
   // 글 보기 함수
