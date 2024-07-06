@@ -6,7 +6,7 @@ body {
 }
 
 header {
-  background-color: #333;
+  background-color: RGB(125, 207, 218);
   color: white;
   padding: 10px 0;
   text-align: center;
@@ -38,14 +38,14 @@ main {
 }
 
 #post-form button {
-  background-color: #333;
+  background-color: #7DCFDA;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 #post-form button:hover {
-  background-color: #555;
+  background-color:#a7d7dd;
 }
 
 #post-list {
@@ -67,4 +67,12 @@ main {
 
 #list-container li:hover {
   background-color: #f0f0f0; /* 마우스를 올렸을 때 배경색이 연한 회색으로 변경 */
+}
+
+#logo>img {
+  position: absolute;
+  top: 0.5vh;
+  left: 1vw;
+  height: 10vh;
+  width: 10vw;
 }
