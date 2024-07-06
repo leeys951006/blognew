@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // 페이지 로드 시 저장된 글 목록을 불러와서 출력
   var savedPosts = JSON.parse(localStorage.getItem('savedPosts')) || [];
   var listContainer = document.getElementById('list-container');
 
-  // 글 목록 초기 출력
+  // 초기 목록 출력
   savedPosts.forEach(function(post, index) {
     var listItem = createListItem(post, index);
     listContainer.appendChild(listItem);
@@ -41,34 +40,62 @@ document.addEventListener('DOMContentLoaded', function() {
   // 글 목록 항목 생성 및 클릭 이벤트 처리 함수
   function createListItem(post, index) {
     var listItem = document.createElement('li');
-    listItem.textContent = post.title;
+    
+    // 제목을 h1 태그로 설정
+    var titleElement = document.createElement('h4');
+    titleElement.textContent = post.title;
+    listItem.appendChild(titleElement);
+    
     listItem.setAttribute('data-index', index);
-
+  
+    // 삭제 버튼 추가
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = '삭제';
+    deleteButton.classList.add('delete-button'); // 삭제 버튼에 클래스 추가
+    deleteButton.addEventListener('click', function(event) {
+      event.stopPropagation(); // 이벤트 버블링 방지
+  
+      deletePost(index);
+      listContainer.removeChild(listItem); // 목록에서 해당 항목 제거
+    });
+    listItem.appendChild(deleteButton);
+  
     // 클릭 이벤트 추가
     listItem.addEventListener('click', function() {
-      var newWindow = window.open('', '_blank');
-      newWindow.document.write('<!DOCTYPE html>');
-      newWindow.document.write('<html lang="ko">');
-      newWindow.document.write('<head>');
-      newWindow.document.write('<meta charset="UTF-8">');
-      newWindow.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
-      newWindow.document.write('<title>글 보기</title>');
-      newWindow.document.write('<link rel="stylesheet" href="../css/work.css">');
-      newWindow.document.write('</head>');
-      newWindow.document.write('<body>');
-      newWindow.document.write('<header>');
-      newWindow.document.write('<h1>글 보기</h1>');
-      newWindow.document.write('</header>');
-      newWindow.document.write('<main>');
-      newWindow.document.write('<h2>' + post.title + '</h2>');
-      newWindow.document.write('<p>' + post.content + '</p>');
-      newWindow.document.write('</main>');
-      newWindow.document.write('</body>');
-      newWindow.document.write('</html>');
-      newWindow.document.close();
+      viewPost(post);
     });
-
+  
     return listItem;
+  }
+  
+  // 삭제 함수
+  function deletePost(index) {
+    savedPosts.splice(index, 1);
+    localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
+  }
+
+  // 글 보기 함수
+  function viewPost(post) {
+    var newWindow = window.open('', '_blank');
+    newWindow.document.write('<!DOCTYPE html>');
+    newWindow.document.write('<html lang="ko">');
+    newWindow.document.write('<head>');
+    newWindow.document.write('<meta charset="UTF-8">');
+    newWindow.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+    newWindow.document.write('<title>글 보기</title>');
+    newWindow.document.write('<link rel="stylesheet" href="../css/work.css">');
+    newWindow.document.write('</head>');
+    newWindow.document.write('<body>');
+    newWindow.document.write('<header>');
+    newWindow.document.write('<h1>글 보기</h1>');
+    newWindow.document.write('</header>');
+    newWindow.document.write('<main>');
+    newWindow.document.write('<h2>' + post.title + '</h2>');
+    newWindow.document.write('<p>' + post.content + '</p>');
+    newWindow.document.write('</main>');
+    newWindow.document.write('</body>');
+    newWindow.document.write('</html>');
+    newWindow.document.close();
   }
 
   // 제출 버튼 클릭 이벤트 핸들러 등록

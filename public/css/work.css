@@ -76,3 +76,26 @@ main {
   height: 10vh;
   width: 10vw;
 }
+
+/* 삭제 버튼 스타일 */
+li {
+  position: relative;
+  padding-right: 30px; /* 삭제 버튼 우측 여백 */
+}
+
+li button.delete-button {
+  position: absolute;
+  top: 50%;
+  right: 5px; /* 삭제 버튼 우측 위치 조정 */
+  transform: translateY(-50%);
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+li button.delete-button:hover {
+  background-color: #d32f2f;
+}
